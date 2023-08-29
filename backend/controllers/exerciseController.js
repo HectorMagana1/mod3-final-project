@@ -20,7 +20,8 @@ module.exports.update = async(req,res) => {
 }
 
 module.exports.create = async(req,res) => {
-    res.json({'message':'create route'})
+    console.log(req.body)
+    res.json(req.body);
 }
 
 module.exports.show = async(req,res) => {
