@@ -15,6 +15,9 @@ export default {
         'root-grey':'#616567',
         'root-blue':'#48537B',
         'root-darkgrey':'#4B4948',
+      },
+      backgroundImage:{
+        'landing-page': '../public/landingPage.jpg'
       }
     },
   },

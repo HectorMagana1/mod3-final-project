@@ -1,0 +1,1 @@
+black_and_white_woman_squating = 'Photo by <a href="https://unsplash.com/@sxoxm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Sven Mieke</a> on <a href="https://unsplash.com/photos/jO6vBWX9h9Y?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
