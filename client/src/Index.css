@@ -1,14 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
-/* :root{
-    --white:#E2E9DF;
-    --dark:#3A373B;
-    --grey:#616567;
-    --blue:#48537B;
-    --darkgrey:#4B4948;
-    --main-font-family:'Roboto Condensed', sans-serif;
-    --main-font-size:50px;
-} */
