@@ -12,7 +12,7 @@ import Registration from './pages/Registration'
 
 export default function App() {
 
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(true)
 
   return (
     <div>
