@@ -7,11 +7,12 @@ import Dashboard from './pages/Dashboard'
 import LandingPage from './pages/LandingPage'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
+import Registration from './pages/Registration'
 
 
 export default function App() {
 
-  const [loggedIn, setLoggedIn] = useState(true)
+  const [loggedIn, setLoggedIn] = useState(false)
 
   return (
     <div>
@@ -28,6 +29,7 @@ export default function App() {
           </> :
           <>
             <Route path='/login' element={<Login />} />
+            <Route path='/registration' element={<Registration />} />
             {/* will need to add check for loaded data  */}
             <Route path='*' element={<Navigate to='/' />} />
           </>
