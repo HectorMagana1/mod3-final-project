@@ -9,7 +9,6 @@ import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Registration from './pages/Registration'
 
-
 export default function App() {
 
   const [loggedIn, setLoggedIn] = useState(true)
