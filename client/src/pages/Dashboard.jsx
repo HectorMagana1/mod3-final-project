@@ -1,21 +1,48 @@
 import React, { useState } from 'react'
-import { DragDropContext,Droppable,Draggable } from 'react-beautiful-dnd'
+import { DragDropContext } from 'react-beautiful-dnd'
+import DayOfWeek from '../components/ListOfWorkouts'
+import ListOfWorkouts from '../components/ListOfWorkouts'
 
 export default function Dashboard() {
 
   const data = {
     workout : [
       {
-        workoutName: 'Bench Press'
+        workoutName: 'Bench Press',
+        _id: 'first'
       },
       {
-        workoutName: 'Lat Pull Downs'
+        workoutName: 'Lat Pull Downs',
+        _id: 'second'
       },
       {
-        workoutName: 'Squat'
+        workoutName: 'Squat',
+        _id: 'third'
       },
       {
-        workoutName: 'Row'
+        workoutName: 'Row',
+        _id: 'fourth'
+      }
+    ]
+  }
+
+  const data2 = {
+    workout : [
+      {
+        workoutName: 'BP',
+        _id: 'fifth'
+      },
+      {
+        workoutName: 'LPD',
+        _id: 'sixth'
+      },
+      {
+        workoutName: 'BSS',
+        _id: 'seventh'
+      },
+      {
+        workoutName: 'BC',
+        _id: 'eighth'
       }
     ]
   }
@@ -31,10 +58,9 @@ export default function Dashboard() {
     setOpenForm((prev) => prev = !prev)
   }
 
-  // console.log(openForm);
+ 
 
   return (
-    <DragDropContext>
       <div>
         <button onClick={open}>+</button>
         {openForm && 
@@ -43,25 +69,19 @@ export default function Dashboard() {
           <button className='shadow-lg px-2 py-[1px] rounded-xl hover:bg-gray-400 bg-gray-200'>Add</button>
         </form>
         }
+      </div>
+  )
+}
 
-        <Droppable droppableId='newWorkouts'>
-          {(provided) => (
-            <ul {...provided.droppableProps} ref={provided.innerRef}>
-              {data.workout.map((workout,index) => {
-                return(
-                  <Draggable key={index} draggableId={workout.workoutName} index={index}>
-                    {(provided) => (
-                    <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} key={index}>{workout.workoutName}</li>
-                    )}
-                  </Draggable>
-                )
-              })}
-              {provided.placeholder}
-            </ul>
-          )}
-        </Droppable>
 
-        {/* <div className='flex'> */}
+// function handleOnDragEnd(result){
+//   console.log(result);
+// }
+//  <DragDropContext onDragEnd={handleOnDragEnd}>
+
+// </DragDropContext> 
+
+
 
         {/* <figure>
           <figcaption>Monday</figcaption>
@@ -136,9 +156,3 @@ export default function Dashboard() {
               </ul>
             </figure>
           </Droppable> */}
-
-        {/* </div> */}
-      </div>
-    </DragDropContext>
-  )
-}

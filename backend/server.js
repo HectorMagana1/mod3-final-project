@@ -10,6 +10,7 @@ connectDB();
 const exerciseRoutes = require('./routes/exerciseRoutes')
 
 app.use(express.json())
+app.use(cors())
 
 app.use('/api/exercises', exerciseRoutes);
 

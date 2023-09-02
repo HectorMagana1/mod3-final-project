@@ -1,8 +1,11 @@
+// https://www.youtube.com/watch?v=SJTazZUQVDE
+
 import React from 'react'
 import { Draggable,Droppable } from 'react-beautiful-dnd'
 import { Link } from 'react-router-dom'
 
-export default function DayOfWeek({day}) {
+export default function ListOfWorkouts({data,day}) {
+
   return (
     <div>
         <Droppable droppableId={day}>
@@ -23,4 +26,5 @@ export default function DayOfWeek({day}) {
         </Droppable>
     </div>
   )
+
 }
