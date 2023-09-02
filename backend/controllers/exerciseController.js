@@ -13,7 +13,8 @@ module.exports.index = async(req,res) => {
 
 module.exports.delete = async(req,res) => {
     try{
-        const exercise = await Exercise.findOneAndDelete({_id:req.params._id})
+        const exercise = await Exercise.findOneAndDelete({_id:req.params.exerciseId})
+        res.status(200).json({message:'Successfully deleted'})
         // will still need to add logic to delete sets
     }
     catch(err){

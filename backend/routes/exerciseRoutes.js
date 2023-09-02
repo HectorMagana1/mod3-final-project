@@ -8,7 +8,7 @@ const exerciseController = require('../controllers/exerciseController')
 router.get('/', exerciseController.index)
 
 // Delete 
-router.delete('/', exerciseController.delete)
+router.delete('/:exerciseId', exerciseController.delete)
 
 // Update
 router.put('/:exerciseId', exerciseController.update)
