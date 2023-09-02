@@ -1,5 +1,4 @@
 const Exercise = require('../models/exerciseModel');
-const User = require('../models/userModel');
 const Set = require('../models/setModel')
 
 module.exports.index = async(req,res) => {
