@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Index.css'
 import { Routes,Route,Navigate } from 'react-router-dom'
 
@@ -11,15 +11,42 @@ import Registration from './pages/Registration'
 
 export default function App() {
 
-  const [loggedIn, setLoggedIn] = useState(true)
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(false)
+
+  async function getUser(){
+    try{
+      const response = await axios.get('api/users', {
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('user')}`
+        }
+      })
+      setUser(response.data)
+    }
+    catch(err){
+      console.log(err.message)
+      localStorage.removeItem('user')
+    }
+    setLoading(true)
+  }
+
+  useEffect(() => {
+    let user = localStorage.getItem('user')
+    if(user){
+      getUser()
+    }
+    else{
+      setLoading(true)
+    }
+  },[])
 
   return (
     <div>
-      <Navbar loggedIn={loggedIn} />
+      <Navbar user={user} />
 
       <Routes>
         <Route path='/' element={<LandingPage />} />
-        {loggedIn?
+        {user?
           <>
             <Route path='/dashboard' element={<Dashboard />} /> 
             <Route path='/profile' element={<Profile />} /> 
@@ -27,8 +54,8 @@ export default function App() {
             <Route path='*' element={<Navigate to='/' />} />
           </> :
           <>
-            <Route path='/login' element={<Login />} />
-            <Route path='/registration' element={<Registration />} />
+            <Route path='/login' element={<Login setUser={ setUser }/>} />
+            <Route path='/registration' element={<Registration setUser={ setUser }/>} />
             {/* will need to add check for loaded data  */}
             <Route path='*' element={<Navigate to='/' />} />
           </>
