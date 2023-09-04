@@ -14,6 +14,6 @@ router.put('/:setId', authorize, setController.update)
 router.post('/:exerciseId', authorize, setController.create)
 
 // Show
-router.get('/:setId', authorize, setController.show)
+// router.get('/:setId', authorize, setController.show)
 
 module.exports = router

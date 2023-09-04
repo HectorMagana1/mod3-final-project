@@ -3,7 +3,8 @@ const User = require('../models/userModel')
 
 module.exports.index = async(req,res) => {
     try{
-        const exercises = await Exercise.find()
+        const user_id = req.id
+        const exercises = await Exercise.find({ user_id })
         res.status(200).json(exercises);
     } catch(err){
         console.log('index error: '+err.message)
@@ -57,7 +58,7 @@ module.exports.create = async(req,res) => {
 
 module.exports.show = async(req,res) => {
     try{
-        const exercise = await Exercise.findById(req.params.exerciseId)
+        const exercise = await Exercise.findById(req.params.exerciseId).populate('sets')
         res.status(200).json(exercise)
     }
     catch(err){
