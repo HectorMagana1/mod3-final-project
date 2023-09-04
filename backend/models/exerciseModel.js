@@ -5,6 +5,9 @@ const exerciseSchema = new Schema({
     exerciseName:{
         type:String
     },
+    user_id:{
+        type:String
+    },
     sets:[{
         type:mongoose.Types.ObjectId,
         ref:'sets'

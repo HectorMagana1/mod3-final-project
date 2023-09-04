@@ -39,11 +39,14 @@ module.exports.update = async(req,res) => {
 }
 
 module.exports.create = async(req,res) => {
-    console.log(req.body);
-    // console.log(req.id);
-    // console.log(req.username);
+
     try{
-        const exercise = await Exercise.create({...req.body})
+        const exercise = await Exercise.create({...req.body,user_id:req.id})
+        await User.findByIdAndUpdate(req.id, {
+            $push:{
+                exercises:exercise._id
+            }
+        })
         res.status(200).json(exercise)
     }
     catch(err){
