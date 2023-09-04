@@ -1,22 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const exerciseController = require('../controllers/exerciseController')
+const { authorize } = require('../middleware/authMiddleware')
 
 // I.N.D.U.C.E.S
 
 // Index view (dashboard)
-router.get('/', exerciseController.index)
+router.get('/', authorize,  exerciseController.index)
 
 // Delete 
-router.delete('/:exerciseId', exerciseController.delete)
+router.delete('/:exerciseId', authorize, exerciseController.delete)
 
 // Update
-router.put('/:exerciseId', exerciseController.update)
+router.put('/:exerciseId', authorize, exerciseController.update)
 
 // Create
-router.post('/', exerciseController.create)
+router.post('/', authorize, exerciseController.create)
 
 // Show
-router.get('/:exerciseId', exerciseController.show)
+router.get('/:exerciseId', authorize, exerciseController.show)
 
 module.exports = router;

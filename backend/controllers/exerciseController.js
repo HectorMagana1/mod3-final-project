@@ -1,5 +1,5 @@
 const Exercise = require('../models/exerciseModel');
-const Set = require('../models/setModel')
+const User = require('../models/userModel')
 
 module.exports.index = async(req,res) => {
     try{
@@ -39,6 +39,9 @@ module.exports.update = async(req,res) => {
 }
 
 module.exports.create = async(req,res) => {
+    console.log(req.body);
+    // console.log(req.id);
+    // console.log(req.username);
     try{
         const exercise = await Exercise.create({...req.body})
         res.status(200).json(exercise)

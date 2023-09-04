@@ -25,3 +25,22 @@ module.exports.register = async(req,res) => {
         res.status(400).json({error:err.message})
     }
 }
+
+module.exports.login = async(req,res) => {
+    try{
+        const foundUser = await User.findOne({username:req.body.username})
+        if(!foundUser){
+            return res.status(400).json({error:'No such user exists'})
+        }
+        const validPass = await bcrypt.compare(req.body.password, foundUser.password)
+        if(!validPass){
+            return res.status(400).json({error: 'Invalid credentials'})
+        }
+        const token = generateToken(foundUser)
+        res.status(200).json({token})
+    }
+    catch(err){
+        console.log(err.message)
+        res.status(400).json({error:err.message})
+    }
+}
