@@ -30,7 +30,7 @@ export default function Registration({ setUser }) {
           name:''
         })
       }
-      localStorage.setItem('user',token)
+      localStorage.setItem('token',token)
       const userResponse = await axios.get('/api/users',{
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`

@@ -9,6 +9,7 @@ import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Registration from './pages/Registration'
 import Show from './pages/Show'
+import axios from './api'
 
 export default function App() {
 
@@ -19,7 +20,7 @@ export default function App() {
     try{
       const response = await axios.get('api/users', {
         headers:{
-          Authorization: `Bearer ${localStorage.getItem('user')}`
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       })
       setUser(response.data)
@@ -32,7 +33,8 @@ export default function App() {
   }
 
   useEffect(() => {
-    let user = localStorage.getItem('user')
+    let user = localStorage.getItem('token')
+    // console.log('user');
     if(user){
       getUser()
     }
@@ -43,7 +45,7 @@ export default function App() {
 
   return (
     <div>
-      <Navbar user={user} />
+      <Navbar user={user} setUser={setUser} />
 
       <Routes>
         <Route path='/' element={<LandingPage />} />

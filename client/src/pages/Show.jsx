@@ -1,14 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from '../api'
+import SetEditModal from '../components/Modals/SetEditModal'
 
 export default function Show() {
 
     const {id} = useParams()
+
     const [form,setForm] = useState(false)
+    const [modal,setModal] = useState(false)
+
     const [exercise,setExercise] = useState({})
-    const [loading,setLoading] = useState(false)
-    // const [setData,setSetData] = useState([])
+    const [loaded,setLoaded] = useState(false)
+    
     const repsRef = useRef()
     const weightRef = useRef()
 
@@ -24,8 +28,7 @@ export default function Show() {
                 }
               })
             setExercise(showExercise.data)
-            // setSetData(showExercise.data.sets)
-            setLoading(true)
+            setLoaded(true)
         }
         catch(error){
             console.log(error)
@@ -51,14 +54,32 @@ export default function Show() {
             let sets = exercise.sets
             sets.push(newSet.data)
             setExercise({...exercise, sets})
-            // console.log(newSet.data);
         }
         catch(error){
             console.log(error)
         }
     }
-    // console.log(setData)
-    // console.log(exercise)
+
+    function openModal(){
+        setModal(true);
+    }
+
+    async function handleDelete(set){
+        try{
+            const sets = exercise.sets
+            const newSetsArr = sets.filter((setElement) => setElement._id!==set._id)
+            setExercise({...exercise, sets:newSetsArr})
+            await axios.delete(`/api/sets/${id}/${set._id}`, {
+                headers: {
+                Authorization:`Bearer ${localStorage.getItem('token')}`
+                }
+            })
+        }
+        catch(error){
+            console.log(error)
+        }
+      }
+
   return (
     <div>
         <h1>{exercise.exerciseName}</h1>
@@ -72,13 +93,22 @@ export default function Show() {
             </form> 
         }
 
-        {loading && exercise.sets.length>0 && 
+        {loaded && exercise.sets.length>0 && 
         <div>
             {exercise.sets.map((set) => {
                 return(
-                    <div>
-                        <h1>{set.reps}</h1>
-                        <h1>{set.weight}</h1>
+                    <div key={set._id} className='flex w-80 justify-between'>
+                        <div className='flex'>
+                            <h1>Reps: </h1>
+                            <h1> {set.reps}</h1>
+                        </div>
+                        <div className='flex'>
+                            <h2>Weight: </h2>
+                            <h1> {set.weight}</h1>
+                        </div>
+                        <button onClick={()=>handleDelete(set)}>X</button>
+                        <button onClick={openModal}>...</button>
+                        {modal && <SetEditModal />}
                     </div>
                 )
                 })
