@@ -1,71 +1,47 @@
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import DayOfWeek from '../components/ListOfWorkouts'
 import ListOfWorkouts from '../components/ListOfWorkouts'
+import axios from '../api'
 
 export default function Dashboard() {
 
-  const data = {
-    workout : [
-      {
-        workoutName: 'Bench Press',
-        _id: 'first'
-      },
-      {
-        workoutName: 'Lat Pull Downs',
-        _id: 'second'
-      },
-      {
-        workoutName: 'Squat',
-        _id: 'third'
-      },
-      {
-        workoutName: 'Row',
-        _id: 'fourth'
-      }
-    ]
-  }
-
-  const data2 = {
-    workout : [
-      {
-        workoutName: 'BP',
-        _id: 'fifth'
-      },
-      {
-        workoutName: 'LPD',
-        _id: 'sixth'
-      },
-      {
-        workoutName: 'BSS',
-        _id: 'seventh'
-      },
-      {
-        workoutName: 'BC',
-        _id: 'eighth'
-      }
-    ]
-  }
-
+  const [input,setInput] = useState('')
   const [openForm,setOpenForm] = useState(false)
+  const exerciseName = useRef()
 
   function open() {
     setOpenForm((prev) => prev = !prev)
   }
 
-  function handleSubmit(event){
+  async function handleSubmit(event){
     event.preventDefault()
+    try{
+      const newExercise = {
+        exerciseName:exerciseName.current.value
+      }
+      await axios.post('/api/exercises', newExercise, {
+        headers: {
+          Authorization:`Bearer ${localStorage.getItem('token')}`
+        }
+      })
+    }
+    catch(error){
+      console.log(error)
+    }
     setOpenForm((prev) => prev = !prev)
   }
 
- 
+  function handleChange(event){
+    setInput(event.target.value)
+  }
 
   return (
       <div>
         <button onClick={open}>+</button>
         {openForm && 
         <form onSubmit={handleSubmit}>
-          <input placeholder='Create Workout' name='newWorkout' className='border-b-[1px] border-gray-400' />
+          <input onChange={handleChange} ref={exerciseName} type='text' placeholder='Create Workout' name='exerciseName' className='border-b-[1px] border-gray-400' />
           <button className='shadow-lg px-2 py-[1px] rounded-xl hover:bg-gray-400 bg-gray-200'>Add</button>
         </form>
         }
