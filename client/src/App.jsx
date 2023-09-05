@@ -8,6 +8,7 @@ import LandingPage from './pages/LandingPage'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Registration from './pages/Registration'
+import Show from './pages/Show'
 
 export default function App() {
 
@@ -50,6 +51,7 @@ export default function App() {
           <>
             <Route path='/dashboard' element={<Dashboard />} /> 
             <Route path='/profile' element={<Profile />} /> 
+            <Route path='/exercises/:id' element={<Show />} />
             {/* will need to add check for loaded data  */}
             <Route path='*' element={<Navigate to='/' />} />
           </> :

@@ -1,13 +1,15 @@
-import React, { useState,useRef } from 'react'
+import React, { useState,useRef, useEffect } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import DayOfWeek from '../components/ListOfWorkouts'
 import ListOfWorkouts from '../components/ListOfWorkouts'
 import axios from '../api'
+import { Link } from 'react-router-dom'
 
 export default function Dashboard() {
 
   const [input,setInput] = useState('')
   const [openForm,setOpenForm] = useState(false)
+  const [exercises,setExercises] = useState([])
   const exerciseName = useRef()
 
   function open() {
@@ -20,11 +22,12 @@ export default function Dashboard() {
       const newExercise = {
         exerciseName:exerciseName.current.value
       }
-      await axios.post('/api/exercises', newExercise, {
+      const newCreatedExercise = await axios.post('/api/exercises', newExercise, {
         headers: {
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }
       })
+      exercises.push(newCreatedExercise.data)
     }
     catch(error){
       console.log(error)
@@ -36,6 +39,25 @@ export default function Dashboard() {
     setInput(event.target.value)
   }
 
+  async function getExercises(){
+    try {
+      const response = await axios.get('/api/exercises', {
+        headers: {
+          Authorization:`Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      setExercises(response.data);
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+  console.log(exercises)
+
+  useEffect(() => {
+    getExercises()
+  },[])
+
   return (
       <div>
         <button onClick={open}>+</button>
@@ -45,90 +67,15 @@ export default function Dashboard() {
           <button className='shadow-lg px-2 py-[1px] rounded-xl hover:bg-gray-400 bg-gray-200'>Add</button>
         </form>
         }
+        {exercises ? exercises.map((exercise) => {
+          return(
+            <div key={exercise._id}>
+              <Link to={`/exercises/${exercise._id}`}>{exercise.exerciseName}</Link>
+            </div>
+          )
+        }):
+        <div>nothing</div>
+        }
       </div>
   )
 }
-
-
-// function handleOnDragEnd(result){
-//   console.log(result);
-// }
-//  <DragDropContext onDragEnd={handleOnDragEnd}>
-
-// </DragDropContext> 
-
-
-
-        {/* <figure>
-          <figcaption>Monday</figcaption>
-            <Droppable droppableId='workouts'>
-              {(provided) => (
-                <ul {...provided.droppableProps} ref={provided.innerRef}>
-                  <li>Bench Press</li>
-                  <li>Chest Flys</li>
-                </ul>
-              )}
-            </Droppable>
-        </figure> */}
-
-
-{/* 
-          <Droppable>
-            <figure>
-              <figcaption>Tuesday</figcaption>
-              <ul>
-                <li>Squats</li>
-                <li>Leg Extensions</li>
-              </ul>
-            </figure>
-          </Droppable>
-
-          <Droppable>
-            <figure>
-              <figcaption>Wednesday</figcaption>
-              <ul>
-                <li>Shoulder Press</li>
-                <li>Shoulder Flys</li>
-              </ul>
-            </figure>
-          </Droppable>
-
-          <Droppable>
-            <figure>
-              <figcaption>Thursday</figcaption>
-              <ul>
-                <li>Bicep Curls</li>
-                <li>Lat Pull Downs</li>
-              </ul>
-            </figure>
-          </Droppable>
-
-          <Droppable>
-            <figure>
-              <figcaption>Friday</figcaption>
-              <ul>
-                <li>Tricep Extensions</li>
-                <li>Bicep Curls</li>
-              </ul>
-            </figure>
-          </Droppable>
-
-          <Droppable>
-            <figure>
-              <figcaption>Saturday</figcaption>
-              <ul>
-                <li>Crunches</li>
-                <li>Sit Ups</li>
-              </ul>
-            </figure>
-          </Droppable>
-
-          <Droppable>
-            <figure>
-              <figcaption>Sunday</figcaption>
-              <ul>
-                <li>Deadlift</li>
-                <li>Reverse Crunch</li>
-              </ul>
-            </figure>
-          </Droppable> */}
