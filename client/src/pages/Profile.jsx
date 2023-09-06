@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react'
-import axios from '../api'
+import axios from 'axios'
+import baseURL from '../api'
 import UpdateProfileModal from '../components/Modals/UpdateProfileModal'
 import { useNavigate } from 'react-router-dom'
 
@@ -11,7 +12,7 @@ export default function Profile({user,setUser}) {
 
   async function getUser(){
     try {
-      const response = await axios.get('/api/users', {
+      const response = await axios.get(baseURL+'/api/users', {
         headers: {
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }
@@ -35,7 +36,7 @@ export default function Profile({user,setUser}) {
   async function handleDelete(event){
     event.preventDefault()
     try{
-      await axios.delete(`/auth/${user._id}`,{
+      await axios.delete(baseURL+`/auth/${user._id}`,{
         headers: {
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }

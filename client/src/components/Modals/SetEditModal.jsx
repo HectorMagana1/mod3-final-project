@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
-import axios from '../../api'
-
+import axios from 'axios'
+import baseURL from '../../api'
 export default function SetEditModal({ selectedSetID,setModal,exercise,setExercise }) {
 
     const repRef = useRef()
@@ -14,12 +14,12 @@ export default function SetEditModal({ selectedSetID,setModal,exercise,setExerci
                 reps:repRef.current.value,
                 weight:weightRef.current.value
             }
-            const newSet = await axios.put(`/api/sets/${selectedSetID}`, updatedValues, {
+            const newSet = await axios.put(baseURL+`/api/sets/${selectedSetID}`, updatedValues, {
                 headers: {
                     Authorization:`Bearer ${localStorage.getItem('token')}`
                 }
             })
-            const updatedSet = await axios.get(`/api/sets/${selectedSetID}`, {
+            const updatedSet = await axios.get(baseURL+`/api/sets/${selectedSetID}`, {
                 headers: {
                     Authorization:`Bearer ${localStorage.getItem('token')}`
                 }

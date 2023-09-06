@@ -1,5 +1,6 @@
 import React, { useState,useRef, useEffect } from 'react'
-import axios from '../api'
+import axios from 'axios'
+import baseURL from '../api'
 import { Link } from 'react-router-dom'
 import UpdateExerciseModal from '../components/Modals/UpdateExerciseModal'
 
@@ -21,7 +22,7 @@ export default function Dashboard() {
       const newExercise = {
         exerciseName:exerciseName.current.value
       }
-      const newCreatedExercise = await axios.post('/api/exercises', newExercise, {
+      const newCreatedExercise = await axios.post(baseURL+'/api/exercises', newExercise, {
         headers: {
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }
@@ -36,7 +37,7 @@ export default function Dashboard() {
 
   async function getExercises(){
     try {
-      const response = await axios.get('/api/exercises', {
+      const response = await axios.get(baseURL+'/api/exercises', {
         headers: {
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }
@@ -54,7 +55,7 @@ export default function Dashboard() {
 
   async function handleDelete(exercise){
     try{
-      await axios.delete(`/api/exercises/${exercise._id}`, {
+      await axios.delete(baseURL+`/api/exercises/${exercise._id}`, {
         headers: {
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }

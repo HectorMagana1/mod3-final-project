@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from '../api'
+import axios from 'axios'
+import baseURL from '../api'
+
 
 export default function Registration({ setUser }) {
   
@@ -20,7 +22,7 @@ export default function Registration({ setUser }) {
   async function handleSubmit(event){
     event.preventDefault()
     try{
-      const authResponse = await axios.post('/auth/register', input)
+      const authResponse = await axios.post(baseURL+'/auth/register', input)
       const token = authResponse.data.token
       if(!token){
         setInput({
@@ -31,7 +33,7 @@ export default function Registration({ setUser }) {
         })
       }
       localStorage.setItem('token',token)
-      const userResponse = await axios.get('/api/users',{
+      const userResponse = await axios.get(baseURL+'/api/users',{
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

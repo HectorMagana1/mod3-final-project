@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
-import axios from '../../api'
+import axios from 'axios'
+import baseURL from '../api'
 
 export default function UpdateExerciseModal({ setUser,setModal,user }) {
 
@@ -17,14 +18,14 @@ export default function UpdateExerciseModal({ setUser,setModal,user }) {
                 password: passwordRef.current.value,
                 username: usernameRef.current.value
             }
-            const updateUser = await axios.put(`/auth/${user._id}`, updatedValue, {
+            const updateUser = await axios.put(baseURL+`/auth/${user._id}`, updatedValue, {
                 headers: {
                     Authorization:`Bearer ${localStorage.getItem('token')}`
                 }
             })
             const token = updateUser.data.token
             localStorage.setItem('token',token)
-            const updatedUser = await axios.get(`/api/users`, {
+            const updatedUser = await axios.get(baseURL+`/api/users`, {
                 headers: {
                     Authorization:`Bearer ${localStorage.getItem('token')}`
                 }

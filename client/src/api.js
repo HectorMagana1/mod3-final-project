@@ -1,9 +1,2 @@
-import axios from 'axios'
-
-const baseURL = import.meta.env.PROD ? import.meta.VITE_API : ''
-
-const customAxiosWithBaseUrl = axios.create({
-    baseURL:baseURL
-})
-
-export default customAxiosWithBaseUrl
+const baseURL = import.meta.env.PROD ? import.meta.env.VITE_API : ''
+export default baseURL

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios from '../api'
+import axios from 'axios'
+import baseURL from '../api'
 import SetEditModal from '../components/Modals/SetEditModal'
 
 export default function Show() {
@@ -25,7 +26,7 @@ export default function Show() {
 
     async function getExercise(){
         try{
-            const showExercise = await axios.get(`/api/exercises/${id}`,{
+            const showExercise = await axios.get(baseURL+`/api/exercises/${id}`,{
                 headers: {
                   Authorization:`Bearer ${localStorage.getItem('token')}`
                 }
@@ -40,7 +41,6 @@ export default function Show() {
 
     useEffect(() => {
         getExercise()
-        console.log('hello')
     },[])
 
     async function handleSubmit(event){
@@ -50,7 +50,7 @@ export default function Show() {
                 reps:repsRef.current.value,
                 weight:weightRef.current.value
             }
-            const newSet = await axios.post(`/api/sets/${id}`, newSetObj,{
+            const newSet = await axios.post(baseURL+`/api/sets/${id}`, newSetObj,{
                 headers: {
                     Authorization:`Bearer ${localStorage.getItem('token')}`
                 }
@@ -75,7 +75,7 @@ export default function Show() {
             const sets = exercise.sets
             const newSetsArr = sets.filter((setElement) => setElement._id!==set._id)
             setExercise({...exercise, sets:newSetsArr})
-            await axios.delete(`/api/sets/${id}/${set._id}`, {
+            await axios.delete(baseURL+`/api/sets/${id}/${set._id}`, {
                 headers: {
                 Authorization:`Bearer ${localStorage.getItem('token')}`
                 }

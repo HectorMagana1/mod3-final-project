@@ -1,4 +1,5 @@
-import axios from '../api'
+import axios from 'axios'
+import baseURL from '../api'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -18,7 +19,7 @@ export default function Login({ setUser }) {
     console.log('logged in')
     event.preventDefault()
     try{
-      const authResponse = await axios.post('https://mod3-backend-33gx.onrender.com/auth/login', input)
+      const authResponse = await axios.post(baseURL+'/auth/login', input)
       const token = authResponse.data.token
     
       if(!token){
@@ -29,7 +30,7 @@ export default function Login({ setUser }) {
         return
       }
       localStorage.setItem('token',token)
-      const userResponse = await axios.get('https://mod3-backend-33gx.onrender.com/api/users',{
+      const userResponse = await axios.get(baseURL+'/api/users',{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }
