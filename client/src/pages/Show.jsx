@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from '../api'
 import SetEditModal from '../components/Modals/SetEditModal'
+import { Line } from 'react-chartjs-2'
 
 export default function Show() {
 
@@ -84,7 +85,12 @@ export default function Show() {
         catch(error){
             console.log(error)
         }
-      }
+    }
+
+    const options = {
+        responsive:true,
+        plugins:{}
+    }
 
   return (
     <div>
@@ -124,7 +130,7 @@ export default function Show() {
         </div>
         }
         <details>
-
+            <Line options={options} data={data} />
         </details>
     </div>  
   )
