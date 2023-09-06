@@ -124,7 +124,7 @@ export default function Show() {
         </div>
         }
         <details>
-            
+
         </details>
     </div>  
   )
