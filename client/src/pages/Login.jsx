@@ -15,9 +15,10 @@ export default function Login({ setUser }) {
   }
 
   async function handleSubmit(event){
+    console.log('logged in')
     event.preventDefault()
     try{
-      const authResponse = await axios.post('/auth/login', input)
+      const authResponse = await axios.post(baseURL+'/auth/login', input)
       const token = authResponse.data.token
     
       if(!token){
