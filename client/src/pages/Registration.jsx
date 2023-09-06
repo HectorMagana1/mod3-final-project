@@ -45,7 +45,7 @@ export default function Registration({ setUser }) {
   }
 
   return (
-    <div className='w-screen h-[800px] flex justify-center items-center'>
+    <div className='w-screen h-screen flex justify-center items-center'>
         <div className='w-2/3 h-[500px] flex flex-col justify-center align-center rounded-3xl'>
 
             <p className='flex justify-start font-universal-font text-gray-500 text-md pb-10'>Register</p>

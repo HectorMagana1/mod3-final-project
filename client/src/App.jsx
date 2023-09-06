@@ -10,6 +10,7 @@ import Profile from './pages/Profile'
 import Registration from './pages/Registration'
 import Show from './pages/Show'
 import axios from './api'
+import Footer from './components/Footer'
 
 export default function App() {
 
@@ -34,7 +35,6 @@ export default function App() {
 
   useEffect(() => {
     let user = localStorage.getItem('token')
-    // console.log('user');
     if(user){
       getUser()
     }
@@ -54,17 +54,16 @@ export default function App() {
             <Route path='/dashboard' element={<Dashboard />} /> 
             <Route path='/profile' element={<Profile user={user} setUser={setUser} />} /> 
             <Route path='/exercises/:id' element={<Show />} />
-            {/* will need to add check for loaded data  */}
             <Route path='*' element={<Navigate to='/' />} />
           </> :
           <>
             <Route path='/login' element={<Login setUser={ setUser }/>} />
             <Route path='/registration' element={<Registration setUser={ setUser }/>} />
-            {/* will need to add check for loaded data  */}
             <Route path='*' element={<Navigate to='/' />} />
           </>
         }
       </Routes>
+      <Footer />
     </div>
   )
 }

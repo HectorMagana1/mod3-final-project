@@ -43,7 +43,7 @@ export default function Login({ setUser }) {
 
   return (
     <div>
-      <div className='absolute border-black w-1/2 h-screen flex justify-center items-center border-2'> 
+      <div className='absolute w-1/2 h-screen flex justify-center items-center border-2'> 
 
         <div className='w-2/3 h-[500px] border-green-500 flex flex-col justify-center align-center rounded-3xl'>
 
@@ -62,8 +62,7 @@ export default function Login({ setUser }) {
           <p className='flex justify-center font-universal-font text-gray-500 text-md mt-5px'>Don't have an account?  <Link className='ml-[5px] text-black' to='/registration'> Sign up for free</Link></p>
         </div>
       </div>
-      <div className='relative border-2 left-1/2 w-1/2 h-screen flex justify-center items-center'>
-        image
+      <div style={{backgroundImage:'url(https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80)'}} className='bg-cover relative border-2 left-1/2 w-1/2 h-screen flex justify-center items-center' >
       </div>
     </div>
   )
