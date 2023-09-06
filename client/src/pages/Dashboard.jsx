@@ -1,12 +1,15 @@
 import React, { useState,useRef, useEffect } from 'react'
 import axios from '../api'
 import { Link } from 'react-router-dom'
+import UpdateExerciseModal from '../components/Modals/UpdateExerciseModal'
 
 export default function Dashboard() {
 
   const [openForm,setOpenForm] = useState(false)
   const [exercises,setExercises] = useState([])
+  const [modal,setModal] = useState(false)
   const exerciseName = useRef()
+  const [selectedExercise,setSelectedExercise] = useState({})
 
   function open() {
     setOpenForm((prev) => prev = !prev)
@@ -65,6 +68,11 @@ export default function Dashboard() {
     }
   }
 
+  function openModal(event){
+    setModal(true);
+    setSelectedExercise(event.target.id)
+}
+
   return (
       <div>
         <button onClick={open}>+</button>
@@ -74,18 +82,19 @@ export default function Dashboard() {
           <button className='shadow-lg px-2 py-[1px] rounded-xl hover:bg-gray-400 bg-gray-200'>Add</button>
         </form>
         }
-        {exercises ? exercises.map((exercise) => {
+        {exercises && exercises.map((exercise) => {
           return(
             <div className="w-40 flex justify-between" key={exercise._id}>
               <Link to={`/exercises/${exercise._id}`}>{exercise.exerciseName}</Link>
               <div className='w-16 flex justify-between'>
                 <button onClick={() => handleDelete(exercise)}>X</button>
+                <button id={exercise._id} onClick={openModal}>...</button>
               </div>
             </div>
           )
-        }):
-        <div>nothing</div>
+        })
         }
+        {modal && <UpdateExerciseModal setModal={setModal} selectedExercise={selectedExercise} exercises={exercises} setExercises={setExercises} />}
       </div>
   )
 }

@@ -2,44 +2,41 @@ import React, { useRef } from 'react'
 import axios from '../../api'
 import { useNavigate } from 'react-router-dom'
 
-export default function SetEditModal({ selectedSetID,setModal,exercise,setExercise }) {
+export default function UpdateExerciseModal({ setModal,selectedExercise,exercises,setExercises }) {
 
-    // console.log(exercise)
-    const repRef = useRef()
-    const weightRef = useRef()
-    const navigate = useNavigate()
-    let val
+    console.log(exercises)
+    const nameRef = useRef()
+    // const navigate = useNavigate()
+    // let val
 
     async function handleSubmit(event){
         event.preventDefault()
         try{
-            const updatedValues = {
-                reps:repRef.current.value,
-                weight:weightRef.current.value
+            const updatedValue = {
+                exerciseName: nameRef.current.value
             }
-            const newSet = await axios.put(`/api/sets/${selectedSetID}`, updatedValues, {
+            const newSet = await axios.put(`/api/exercises/${selectedExercise}`, updatedValue, {
                 headers: {
                     Authorization:`Bearer ${localStorage.getItem('token')}`
                 }
             })
-            const updatedSet = await axios.get(`/api/sets/${selectedSetID}`, {
+            const updatedExercise = await axios.get(`/api/exercises/${selectedExercise}`, {
                 headers: {
                     Authorization:`Bearer ${localStorage.getItem('token')}`
                 }
             })
-            console.log(updatedSet.data)
-            const sets = exercise.sets
-            console.log(sets)
-            const index = sets.findIndex((element) => element._id === selectedSetID)
-            sets.splice(index,1,updatedSet.data)
-            setExercise({...exercise, sets})
+            // console.log(updatedExercise.data)
+            const index = exercises.findIndex((element) => element._id === selectedExercise)
+            console.log(index)
+            exercises.splice(index,1,updatedExercise.data)
+            setExercises(exercises)
         }
         catch(error){
             console.log(error.message)
         }
         setModal(false)
     }
-        
+    
     function handleCancel(){
         setModal(false)
     }
@@ -48,8 +45,7 @@ export default function SetEditModal({ selectedSetID,setModal,exercise,setExerci
     <div className='fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center'>
         <div className='w-[600px] bg-white flex flex-col'>
             <form onSubmit={handleSubmit}>
-                <input ref={repRef} type="text" name="reps" placeholder="Reps" />
-                <input ref={weightRef} type="text" name="weight" placeholder="Weight" />
+                <input ref={nameRef} type="text" name="exerciseName" placeholder="Exercise name" />
                 <button>Edit</button>
             </form>
             <button onClick={handleCancel}>Cancel</button>

@@ -2,11 +2,16 @@ const User = require('../models/setModel')
 const Exercise = require('../models/exerciseModel')
 const Set = require('../models/setModel')
 
-// module.exports.show = async(req,res) => {
-//     console.log(req.body)
-//     console.log(req.params)
-//     res.status(200).json({message:'set show'})
-// }
+module.exports.show = async(req,res) => {
+    try{
+        const set = await Set.findOne({_id:req.params.setId})
+        res.status(200).json(set)
+    }
+    catch(err){
+        console.log(err.message)
+        res.status(400).json({error:err.message})
+    }
+}
 
 module.exports.delete = async(req,res) => {
     try{
@@ -24,8 +29,17 @@ module.exports.delete = async(req,res) => {
 }
 
 module.exports.update = async(req,res) => {
-    res.status(200).json({message:'set update'})
-
+    try{
+        const set = await Set.findOneAndUpdate({_id:req.params.setId},req.body)
+        if(!set){
+            throw new Error('Access denied')
+        }
+        res.status(200).json({message:'Success'})
+    }
+    catch(error){
+        console.log(err.message)
+        res.status(400).json({error:err.message})
+    }
 }
 
 module.exports.create = async(req,res) => {

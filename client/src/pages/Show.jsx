@@ -1,17 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from '../api'
 import SetEditModal from '../components/Modals/SetEditModal'
 
 export default function Show() {
 
     const {id} = useParams()
+    const navigate = useNavigate()
 
     const [form,setForm] = useState(false)
     const [modal,setModal] = useState(false)
 
     const [exercise,setExercise] = useState({})
     const [loaded,setLoaded] = useState(false)
+
+    const [selectedSet,setSelectedSet] = useState('')
     
     const repsRef = useRef()
     const weightRef = useRef()
@@ -37,6 +40,7 @@ export default function Show() {
 
     useEffect(() => {
         getExercise()
+        console.log('hello')
     },[])
 
     async function handleSubmit(event){
@@ -54,14 +58,16 @@ export default function Show() {
             let sets = exercise.sets
             sets.push(newSet.data)
             setExercise({...exercise, sets})
+            setForm((prev) => prev = !prev)
         }
         catch(error){
             console.log(error)
         }
     }
 
-    function openModal(){
+    function openModal(event){
         setModal(true);
+        setSelectedSet(event.target.id)
     }
 
     async function handleDelete(set){
@@ -82,6 +88,7 @@ export default function Show() {
 
   return (
     <div>
+        <button onClick={()=>navigate('/dashboard')}>Back</button>
         <h1>{exercise.exerciseName}</h1>
         <button onClick={openForm}>+</button>
 
@@ -95,9 +102,10 @@ export default function Show() {
 
         {loaded && exercise.sets.length>0 && 
         <div>
-            {exercise.sets.map((set) => {
+            {exercise.sets.map((set,i) => {
                 return(
                     <div key={set._id} className='flex w-80 justify-between'>
+                        <h1>Set {i+1}</h1>
                         <div className='flex'>
                             <h1>Reps: </h1>
                             <h1> {set.reps}</h1>
@@ -107,15 +115,17 @@ export default function Show() {
                             <h1> {set.weight}</h1>
                         </div>
                         <button onClick={()=>handleDelete(set)}>X</button>
-                        <button onClick={openModal}>...</button>
-                        {modal && <SetEditModal />}
+                        <button id={set._id} onClick={openModal}>...</button>
                     </div>
                 )
                 })
             }
+            {modal && <SetEditModal selectedSetID={selectedSet} setModal={setModal} exercise={exercise} setExercise={setExercise} />}
         </div>
         }
-
-    </div>
+        <details>
+            
+        </details>
+    </div>  
   )
 }
