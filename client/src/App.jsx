@@ -9,7 +9,8 @@ import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Registration from './pages/Registration'
 import Show from './pages/Show'
-import axios from './api'
+import axios from 'axios'
+import baseURL from './api'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -19,7 +20,7 @@ export default function App() {
 
   async function getUser(){
     try{
-      const response = await axios.get('api/users', {
+      const response = await axios.get(baseURL+'api/users', {
         headers:{
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

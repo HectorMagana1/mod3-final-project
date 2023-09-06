@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import axios from 'axios'
-import baseURL from '../api'
+import baseURL from '../../api'
 
 export default function UpdateExerciseModal({ setUser,setModal,user }) {
 
