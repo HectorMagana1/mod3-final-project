@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from '../api'
 import SetEditModal from '../components/Modals/SetEditModal'
-import { Line } from 'react-chartjs-2'
 
 export default function Show() {
 
@@ -87,11 +86,6 @@ export default function Show() {
         }
     }
 
-    const options = {
-        responsive:true,
-        plugins:{}
-    }
-
   return (
     <div>
         <button onClick={()=>navigate('/dashboard')}>Back</button>
@@ -129,9 +123,6 @@ export default function Show() {
             {modal && <SetEditModal selectedSetID={selectedSet} setModal={setModal} exercise={exercise} setExercise={setExercise} />}
         </div>
         }
-        <details>
-            <Line options={options} data={data} />
-        </details>
     </div>  
   )
 }

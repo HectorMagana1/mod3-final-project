@@ -52,7 +52,7 @@ export default function App() {
         {user?
           <>
             <Route path='/dashboard' element={<Dashboard />} /> 
-            <Route path='/profile' element={<Profile />} /> 
+            <Route path='/profile' element={<Profile user={user} setUser={setUser} />} /> 
             <Route path='/exercises/:id' element={<Show />} />
             {/* will need to add check for loaded data  */}
             <Route path='*' element={<Navigate to='/' />} />

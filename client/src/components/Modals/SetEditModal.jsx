@@ -1,14 +1,11 @@
 import React, { useRef } from 'react'
 import axios from '../../api'
-import { useNavigate } from 'react-router-dom'
 
 export default function SetEditModal({ selectedSetID,setModal,exercise,setExercise }) {
 
-    // console.log(exercise)
     const repRef = useRef()
     const weightRef = useRef()
-    const navigate = useNavigate()
-    let val
+
 
     async function handleSubmit(event){
         event.preventDefault()

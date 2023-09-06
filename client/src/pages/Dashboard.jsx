@@ -47,7 +47,6 @@ export default function Dashboard() {
       console.log(error)
     }
   }
-  // console.log(exercises)
 
   useEffect(() => {
     getExercises()
