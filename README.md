@@ -43,6 +43,7 @@ ERD screenshot for detailing what my database would look like
 <img width="856" alt="Screenshot 2023-09-06 at 11 37 00 PM" src="https://github.com/HectorMagana1/mod3-final-project/assets/116575108/a9eabcf0-2061-4382-8982-63b91e558198">
 
 Early screenshot from planning the scope of my project
+https://trello.com/b/dcQWDr6A/fitness-social-media-webapp
 
 ## Getting Started
 
