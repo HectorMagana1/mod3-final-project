@@ -57,7 +57,7 @@ export default function Profile({user,setUser}) {
   return (
     <div className='flex items-center flex-col h-screen'>
       <div className='relative top-20 flex justify-center'>
-        <div className='border-[1px] w-3/4 h-80 rounded-2 rounded-lg shadow-2x flex justify-center items-center'>
+        <div className='border-[1px] shadow-lg w-3/4 h-80 rounded-2 rounded-lg shadow-2x flex justify-center items-center'>
           <div className='relative h-full grid grid-cols-4 grid-rows-8 p-4'>
             <p className='col-start-1 pb-8'> My Profile</p>
             <p className='row-start-2'>Name</p>
