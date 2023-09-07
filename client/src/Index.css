@@ -7,4 +7,14 @@
     li {
         @apply bg-gray-100 p-2 flex items-center hover:bg-gray-200 border-2
     }
+    .editButton{
+        @apply transition-all duration-300 hover:bg-root-grey w-10 h-8 rounded-lg
+    }
+    .deleteButton{
+        @apply transition-all duration-300 hover:bg-root-grey w-10 h-8 rounded-lg mx-3
+    }
+    .listItem{
+        @apply bg-gradient-to-r duration-500 from-root-white my-2 w-11/12 h-16 shadow-lg flex justify-between items-center text-3xl hover:bg-root-white transition-all hover:h-20
+    }
 }
+

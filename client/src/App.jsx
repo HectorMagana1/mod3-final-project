@@ -11,7 +11,6 @@ import Registration from './pages/Registration'
 import Show from './pages/Show'
 import axios from 'axios'
 import baseURL from './api'
-import Footer from './components/Footer'
 
 export default function App() {
 
@@ -64,7 +63,6 @@ export default function App() {
           </>
         }
       </Routes>
-      <Footer />
     </div>
   )
 }
