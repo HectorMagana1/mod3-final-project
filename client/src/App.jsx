@@ -4,7 +4,6 @@ import { Routes,Route,Navigate } from 'react-router-dom'
 
 import Navbar from './components/Navbar'
 import Dashboard from './pages/Dashboard'
-import LandingPage from './pages/LandingPage'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Registration from './pages/Registration'
@@ -28,7 +27,7 @@ export default function App() {
     }
     catch(err){
       console.log(err.message)
-      localStorage.removeItem('user')
+      localStorage.removeItem('token')
     }
     setLoading(true)
   }
@@ -48,18 +47,17 @@ export default function App() {
       <Navbar user={user} setUser={setUser} />
 
       <Routes>
-        <Route path='/' element={<LandingPage />} />
         {user?
           <>
             <Route path='/dashboard' element={<Dashboard />} /> 
             <Route path='/profile' element={<Profile user={user} setUser={setUser} />} /> 
             <Route path='/exercises/:id' element={<Show />} />
-            <Route path='*' element={<Navigate to='/' />} />
+            <Route path='*' element={<Navigate to='/dashboard' />} />
           </> :
           <>
             <Route path='/login' element={<Login setUser={ setUser }/>} />
             <Route path='/registration' element={<Registration setUser={ setUser }/>} />
-            <Route path='*' element={<Navigate to='/' />} />
+            <Route path='*' element={<Navigate to='/login' />} />
           </>
         }
       </Routes>

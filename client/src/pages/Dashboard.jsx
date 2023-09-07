@@ -99,7 +99,7 @@ export default function Dashboard() {
               <Link className='ml-10' to={`/exercises/${exercise._id}`}>{exercise.exerciseName}</Link>
               <div className='w-16 flex justify-between mr-20'>
                 <button onClick={() => handleDelete(exercise)}><BiTrash color="gray" className='deleteButton' /></button>
-                <button id={exercise._id} onClick={openModal}><BiEdit color="gray" className='editButton' /></button>
+                <button id={exercise._id} onClick={openModal}><BiEdit id={exercise._id} color="gray" className='editButton' /></button>
               </div>
             </div>
           )

@@ -128,7 +128,7 @@ export default function Show() {
                             </div>
                             <div className='mr-10'>
                                 <button onClick={()=>handleDelete(set)}><BiTrash color='grey' className='deleteButton' /></button>
-                                <button id={set._id} onClick={openModal}><BiEdit color='grey' className='editButton' /></button>
+                                <button id={set._id} onClick={openModal}><BiEdit id={set._id} color='grey' className='editButton' /></button>
                             </div>
                         </div>
                     )

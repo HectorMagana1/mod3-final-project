@@ -56,7 +56,7 @@ export default function UpdateExerciseModal({ setUser,setModal,user,pass,name,us
                 <input className='border-b-[1px] w-11/12 text-3xl p-2 my-2' ref={nameRef} type="text" name="name" placeholder={name} />
                 <input className='border-b-[1px] w-11/12 text-3xl p-2 my-2' ref={emailRef} type="email" name="email" placeholder={email} />
                 <input className='border-b-[1px] w-11/12 text-3xl p-2 my-2' ref={usernameRef} type="text" name="username" placeholder={userName} />
-                <input className='border-b-[1px] w-11/12 text-3xl p-2 my-2' ref={passwordRef} type="password" name="password" placeholder={pass} />
+                <input className='border-b-[1px] w-11/12 text-3xl p-2 my-2' ref={passwordRef} type="password" name="password" placeholder='Password' />
                 <button className='shadow-lg px-2 py-[1px] rounded-xl hover:bg-root-grey bg-gray-200 transition-all duration-500 text-2xl mt-4'>Edit</button>
             </form>
         </div>

@@ -12,6 +12,7 @@ export default function SetEditModal({ selectedSetID,setModal,exercise,setExerci
     async function handleSubmit(event){
         event.preventDefault()
         try{
+            console.log(selectedSetID)
             const updatedValues = {
                 reps:repRef.current.value,
                 weight:weightRef.current.value
