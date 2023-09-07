@@ -64,7 +64,7 @@ export default function Login({ setUser }) {
           <p className='flex justify-center font-universal-font text-gray-500 text-md mt-5px'>Don't have an account?  <Link className='ml-[5px] text-black' to='/registration'> Sign up for free</Link></p>
         </div>
       </div>
-      <div style={{backgroundImage:'url(https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80)'}} className='bg-cover relative border-2 left-1/2 w-1/2 h-screen flex justify-center items-center' >
+      <div style={{backgroundImage:'url(https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80)'}} className='bg-cover relative left-1/2 w-1/2 h-screen flex justify-center items-center' >
       </div>
     </div>
   )

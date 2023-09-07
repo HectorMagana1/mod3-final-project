@@ -1,14 +1,12 @@
 import React, { useRef } from 'react'
 import axios from 'axios'
 import baseURL from '../../api'
-import { useNavigate } from 'react-router-dom'
+import {BiSolidXCircle} from 'react-icons/bi'
+
 
 export default function UpdateExerciseModal({ setModal,selectedExercise,exercises,setExercises }) {
 
-    console.log(exercises)
     const nameRef = useRef()
-    // const navigate = useNavigate()
-    // let val
 
     async function handleSubmit(event){
         event.preventDefault()
@@ -26,9 +24,7 @@ export default function UpdateExerciseModal({ setModal,selectedExercise,exercise
                     Authorization:`Bearer ${localStorage.getItem('token')}`
                 }
             })
-            // console.log(updatedExercise.data)
             const index = exercises.findIndex((element) => element._id === selectedExercise)
-            console.log(index)
             exercises.splice(index,1,updatedExercise.data)
             setExercises(exercises)
         }
@@ -44,12 +40,17 @@ export default function UpdateExerciseModal({ setModal,selectedExercise,exercise
 
   return (
     <div className='fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center'>
-        <div className='w-[600px] bg-white flex flex-col'>
-            <form onSubmit={handleSubmit}>
-                <input ref={nameRef} type="text" name="exerciseName" placeholder="Exercise name" />
-                <button>Edit</button>
+        <div className='w-[600px] h-[400px] bg-white flex flex-col justify-center items-center rounded-xl'>
+            <div className='w-full relative -top-6'>
+                <div className='flex justify-end'>
+                <button className='pr-2' onClick={handleCancel}><BiSolidXCircle size='30' /></button>
+                </div>
+            </div>
+
+            <form className=' w-11/12 h-3/4 flex flex-col items-center justify-center' onSubmit={handleSubmit}>
+                <input className='border-b-[1px] w-11/12 text-3xl p-2 my-2' ref={nameRef} type="text" name="exerciseName" placeholder="Exercise name" />
+                <button className='shadow-lg px-2 py-[1px] rounded-xl hover:bg-root-grey bg-gray-200 transition-all duration-500 text-2xl mt-4'>Edit</button>
             </form>
-            <button onClick={handleCancel}>Cancel</button>
         </div>
     </div>
   )
